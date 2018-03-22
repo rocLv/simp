@@ -5,7 +5,7 @@ module Simp
   class Application
     def call(env)
       [200, {"Content-Type" => "html"},
-       [html(env["REQUEST_PATH"][1..0])]
+       [html(env["REQUEST_PATH"][1..-1])]
       ]
     end
 
@@ -18,7 +18,8 @@ module Simp
     end
 
     def html(file_name)
-      if File.exists?(file_name)
+      puts file_name
+      if File.exist?("#{file_name}.html.erb")
         render file_name
       else
         render_400
